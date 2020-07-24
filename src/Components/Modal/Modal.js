@@ -45,7 +45,6 @@ const converter = (time) => {
 }
 
 export default function SimpleModal({ name, time, clicked }) {
-    console.log("instance one", name, time, clicked)
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(clicked);
@@ -53,7 +52,6 @@ export default function SimpleModal({ name, time, clicked }) {
     const handleClose = () => {
         setOpen(false);
     };
-    console.log(name, time, clicked)
     const body = (
         <div style={modalStyle} className={classes.paper}>
 
@@ -63,15 +61,18 @@ export default function SimpleModal({ name, time, clicked }) {
                 let timeStart = converter(time.start_time)
                 let timeEnd = converter(time.end_time)
                 totalTime += diffInTime(timeEnd, timeStart)
+                console.log(
+                  
+                )
                 return (
                     <div>
                         <p>{timeStart.slice(0, -6)} to {timeEnd.slice(0, -6)}</p>
                         <p>{totalTime.toFixed(2)} hrs </p>
                         <div id="simple-modal-description">
-                            <LinearProgress variant="determinate" style={{ height: 10 }} value={(totalTime / 24) * 100} />
-                            <Typography variant="body2" color="textSecondary">{`${Math.round(
-                                (totalTime / 24) * 100,
-                            )}%`}</Typography>
+                            <LinearProgress variant="determinate" style={{ height: 10 }} value={(totalTime/24*(Math.ceil( (totalTime/24).toFixed(3)))) * 100} />
+                            <Typography variant="body2" color="textSecondary">{`${Math.round((totalTime/24*(Math.ceil( (totalTime/24).toFixed(3)))) * 100)
+                                 }%`}
+                            </Typography>
                         </div>
                     </div>
                 )
