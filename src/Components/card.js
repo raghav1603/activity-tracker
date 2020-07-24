@@ -8,7 +8,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import { Button } from '@material-ui/core';
-import Modal from './Modal/Modal'
+import SimpleModal from './Modal/Modal'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -64,11 +64,11 @@ export default function StatusCard({ id, name, time }) {
         let timeEnd = converter(time.end_time)
         totalTime += diffInTime(timeEnd, timeStart)
     })
-    let timeArray=time
+    let timeArray = time
     let render = null
     if (clicked) {
-        render = <Modal
-            key={id+name}
+        render = <SimpleModal
+            key={id + name}
             name={name}
             time={timeArray}
             clicked />
@@ -82,7 +82,6 @@ export default function StatusCard({ id, name, time }) {
                             {name.slice(0, 1)}
                         </Avatar>
                     }
-
                     title={name}
                 />
                 <CardContent>
@@ -96,6 +95,7 @@ export default function StatusCard({ id, name, time }) {
                 </Button>
                 </CardActions>
             </Card>
-            {render}</div>
+            {render}
+        </div>
     );
 }

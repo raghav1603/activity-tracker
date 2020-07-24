@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-
+import Typography from '@material-ui/core/Typography';
 import { LinearProgress } from '@material-ui/core'
 
 function rand() {
@@ -44,7 +44,8 @@ const converter = (time) => {
     else return time.slice(0, -2)
 }
 
-export default function SimpleModal({ name, time ,clicked}) {
+export default function SimpleModal({ name, time, clicked }) {
+    console.log("instance one", name, time, clicked)
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(clicked);
@@ -52,16 +53,30 @@ export default function SimpleModal({ name, time ,clicked}) {
     const handleClose = () => {
         setOpen(false);
     };
-    let timeStart=React.useRef(time)
-    console.log(timeStart.current)
+    console.log(name, time, clicked)
     const body = (
         <div style={modalStyle} className={classes.paper}>
 
             <h2 id="simple-modal-title">{name}</h2>
-            <span id="simple-modal-description">
-                <LinearProgress variant="determinate" value={60} />
-            </span>
-            <SimpleModal />
+            {time.map(time => {
+                let totalTime = 0
+                let timeStart = converter(time.start_time)
+                let timeEnd = converter(time.end_time)
+                totalTime += diffInTime(timeEnd, timeStart)
+                return (
+                    <div>
+                        <p>{timeStart.slice(0, -6)} to {timeEnd.slice(0, -6)}</p>
+                        <p>{totalTime.toFixed(2)} hrs </p>
+                        <div id="simple-modal-description">
+                            <LinearProgress variant="determinate" style={{ height: 10 }} value={(totalTime / 24) * 100} />
+                            <Typography variant="body2" color="textSecondary">{`${Math.round(
+                                (totalTime / 24) * 100,
+                            )}%`}</Typography>
+                        </div>
+                    </div>
+                )
+            })}
+
         </div>
     );
 
