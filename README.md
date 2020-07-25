@@ -1,7 +1,7 @@
 This project displays the activity time , and total activity time for a user in a given period of time.
  
 ## Table of contents
-- [Libraries](#Libraries used)
+- [Libraries](#libraries used)
 - [Setup](#setup)
 
 
