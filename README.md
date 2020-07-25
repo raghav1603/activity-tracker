@@ -5,7 +5,7 @@ This project displays the activity time , and total activity time for a user in 
 - [Setup](#setup)
 
 
-### Libraries used-
+### Libraries used
     - React
     - MaterialUI (for component / modals / progress bar)
     - Axios (to fetch JSON data)
